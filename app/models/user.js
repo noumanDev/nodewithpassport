@@ -11,7 +11,19 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: { type: String, default: '' },
-  email: { type: String, default: '' },
+  profilePic: { type: String, default: '' },
+  email: {
+    type: String, required: true,
+    trim: true, unique: true,
+    match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  },
+  facebookProvider: {
+    type: {
+      id: String,
+      access_token: String
+    },
+    select: false
+  },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' }
 });
@@ -22,6 +34,13 @@ const UserSchema = new Schema({
  * - validations
  * - virtuals
  */
+
+
+/**
+ * virtuals
+ */
+UserSchema.set('toJSON', { getters: true, virtuals: true });
+
 
 /**
  * Methods
@@ -38,5 +57,4 @@ UserSchema.static({});
 /**
  * Register
  */
-
-mongoose.model('User', UserSchema);
+module.exports = User = mongoose.model('User', UserSchema)

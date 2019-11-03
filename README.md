@@ -1,3 +1,27 @@
+## Usage
+    git clone https://github.com/noumanDev/nodewithpassport.git
+    create .env file and paste following
+        MONGODB_URL=mongodb://localhost:27017/anx
+        COOKIE_SECRET=hellosecrethowareyou
+        FACEBOOK_CLIENT_ID=1549485661857583
+        FACEBOOK_CLIENT_SECRET=8d2631d9338e5129729e1bc4f895621f
+        FACEBOOK_CALLBACK_URL=http://localhost:3001/api/auth/facebook/callback
+        CLIENT_BASE_URL=https://localhost:3000
+    
+    npm install
+    npm start
+        
+
+Passport js
+    https://medium.com/tkssharma/authentication-using-passport-js-social-auth-with-node-js-1e1ec7086ded
+    https://codeburst.io/node-js-by-example-part-3-31a29f5d7e9c
+
+
+
+
+
+
+
 [![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose/master.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose)
 [![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/madhums/node-express-mongoose)

@@ -5,7 +5,9 @@
  */
 
 const mongoose = require('mongoose');
-const local = require('./passport/local');
+//const local = require('./passport/local');
+const facebook = require('./passport/facebook');
+const Bearer = require('./passport/Bearer');
 
 const User = mongoose.model('User');
 
@@ -15,9 +17,12 @@ const User = mongoose.model('User');
 
 module.exports = function(passport) {
   // serialize and deserialize sessions
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser((id, done) => User.findOne({ _id: id }, done));
+  // passport.serializeUser((user, done) => done(null, user.id));
+  // passport.deserializeUser((id, done) => User.findOne({ _id: id }, done));
 
   // use these strategies
-  passport.use(local);
+ // passport.use(local);
+  passport.use(facebook);
+  passport.use(Bearer);
+
 };

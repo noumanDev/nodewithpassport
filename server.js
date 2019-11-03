@@ -18,9 +18,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const config = require('./config');
+const cors = require('cors');
 
 const models = join(__dirname, 'app/models');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const app = express();
 const connection = connect();
@@ -33,6 +34,15 @@ module.exports = {
   app,
   connection
 };
+
+var corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
+
 
 // Bootstrap models
 fs.readdirSync(models)
