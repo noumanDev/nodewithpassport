@@ -5,6 +5,8 @@
  */
 
 const home = require('../app/controllers/home');
+let auth = require('../app/controllers/auth');
+
 
 
 /**
@@ -12,42 +14,24 @@ const home = require('../app/controllers/home');
  */
 
 module.exports = function (app, passport) {
-
+  auth = auth(app, passport);
+  
   /**
    * Home routes
    */
   app.get('/', home.index);
 
-
-
   /**
-   * authentication routes
+   * auth routes
    */
-  // Redirect the user to Facebook for authentication.  When complete,
-  // Facebook will redirect the user back to the application at
-  //     /auth/facebook/callback
-  app.get('/api/auth/facebook', passport.authenticate('facebook', { session: false, scope: [] }));
+  app.post('/api/auth/register', auth.register)
 
-  // Facebook will redirect the user to this URL after approval.  Finish the
-  // authentication process by attempting to obtain an access token.  If
-  // access was granted, the user will be logged in.  Otherwise,
-  // authentication has failed.
-  app.get('/api/auth/facebook/callback',
-    passport.authenticate('facebook', {
-      session: false,
-      // successRedirect: `${process.env.CLIENT_BASE_URL}/`,
-      failureRedirect: `${process.env.CLIENT_BASE_URL}/account/login`
-    }),
-    function (req, res) {
-      res.redirect(`${process.env.CLIENT_BASE_URL}/account/login/?access_token=${req.user.facebookProvider.access_token}`);
-    });
+  app.post('/api/auth/login', auth.login)
 
-  app.get('/profile', passport.authenticate('bearer', { session: false }),
-    function (req, res) {
-      console.log(req.headers)
-      res.send("LOGGED IN as " + req.user.facebookId + " - <a href=\"/logout\">Log out</a>");
-    }
-  );
+  app.get('/api/auth/current', passport.authenticate('jwt', { session: false }), auth.current)
+
+
+
 
   /**
    * Error handling

@@ -12,14 +12,15 @@
     npm start
         
 
+## References
 Passport js
-    https://medium.com/tkssharma/authentication-using-passport-js-social-auth-with-node-js-1e1ec7086ded
-    https://codeburst.io/node-js-by-example-part-3-31a29f5d7e9c
+    local auth
+    https://www.freecodecamp.org/news/learn-how-to-handle-authentication-with-node-using-passport-js-4a56ed18e81e/
 
+    jwt auth
+    http://www.passportjs.org/packages/passport-jwt/
 
-
-
-
+    
 
 
 [![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose/master.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose)

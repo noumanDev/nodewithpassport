@@ -12,22 +12,21 @@ const User = mongoose.model('User');
 
 module.exports = new LocalStrategy(
   {
-    usernameField: 'email',
-    passwordField: 'password'
+    usernameField: 'user[email]',
+    passwordField: 'user[password]'
   },
-  function(email, password, done) {
-    const options = {
-      criteria: { email: email }
-    };
-    User.load(options, function(err, user) {
-      if (err) return done(err);
+  async function (email, password, done) {
+    try {
+      let user = await User.findOne({ email: email });
       if (!user) {
         return done(null, false, { message: 'Unknown user' });
       }
-      if (!user.authenticate(password)) {
+      if (!user.validatePassword(password)) {
         return done(null, false, { message: 'Invalid password' });
       }
-      return done(null, user);
-    });
+      return done(null,user)
+    } catch (err) {
+      if (err) return done(err);
+    }
   }
 );

@@ -5,9 +5,9 @@
  */
 
 const mongoose = require('mongoose');
-//const local = require('./passport/local');
-const facebook = require('./passport/facebook');
-const Bearer = require('./passport/Bearer');
+const local = require('./passport/local');
+// const facebook = require('./passport/facebook');
+ const jwtStrategy = require('./passport/jwt');
 
 const User = mongoose.model('User');
 
@@ -21,8 +21,9 @@ module.exports = function(passport) {
   // passport.deserializeUser((id, done) => User.findOne({ _id: id }, done));
 
   // use these strategies
- // passport.use(local);
-  passport.use(facebook);
-  passport.use(Bearer);
+    passport.use(local);
+ // passport.use(facebook);
+  passport.use(jwtStrategy);
+
 
 };
