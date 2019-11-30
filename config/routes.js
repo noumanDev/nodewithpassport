@@ -6,6 +6,8 @@
 
 const home = require('../app/controllers/home');
 let auth = require('../app/controllers/auth');
+let item = require('../app/controllers/item');
+let order = require('../app/controllers/order');
 
 
 
@@ -15,7 +17,7 @@ let auth = require('../app/controllers/auth');
 
 module.exports = function (app, passport) {
   auth = auth(app, passport);
-  
+
   /**
    * Home routes
    */
@@ -31,7 +33,23 @@ module.exports = function (app, passport) {
   app.get('/api/auth/current', passport.authenticate('jwt', { session: false }), auth.current)
 
 
+  /**
+  * items routes
+  */
+  app.post('/api/items', item.create)
+  app.get('/api/items', item.findAll)
+  app.get('/api/items/:itemId', item.findOne)
+  app.put('/api/items/:itemId', item.update)
+  app.delete('/api/items/:itemId', item.delete)
 
+  /**
+  * orders routes
+  */
+  app.post('/api/orders', order.create)
+  app.get('/api/orders', order.findAll)
+  app.get('/api/orders/:orderId', order.findOne)
+  app.put('/api/orders/:orderId', order.update)
+  app.delete('/api/orders/:orderId', order.delete)
 
   /**
    * Error handling

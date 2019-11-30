@@ -20,6 +20,9 @@ Passport js
     jwt auth
     http://www.passportjs.org/packages/passport-jwt/
 
+how to create rest api
+    https://www.callicoder.com/node-js-express-mongodb-restful-crud-api-tutorial/
+
     
 
 
